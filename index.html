@@ -283,4 +283,114 @@ const RAW_URL = `https://gist.githubusercontent.com/Hamzamain-spec/${GIST_ID}/ra
 
 function toggleMenu(){const n=document.getElementById('mobile-nav');n.classList.toggle('open');}
 const d=new Date(),days=['So','Mo','Di','Mi','Do','Fr','Sa'],months=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-const bgs=['bg1','bg2','bg3','bg4','
+const bgs=['bg1','bg2','bg3','bg4','bg5','bg6','bg7','bg8'];
+
+async function loadPosts() {
+  try {
+    const response = await fetch(RAW_URL);
+    const allPosts = await response.json();
+    
+    // Filter posts by site name
+    const posts = Array.isArray(allPosts) 
+      ? allPosts.filter(p => p.site === SITE_NAME).reverse()
+      : [];
+    
+    document.getElementById('sec-count').textContent = posts.length + ' Beiträge';
+    
+    if (!posts.length) {
+      document.getElementById('hero-empty').style.display = 'block';
+      document.getElementById('hero-section').style.display = 'none';
+      document.getElementById('posts-list').innerHTML = '<div class="empty-state"><h3>Noch keine Artikel</h3><p>Erstelle deinen ersten Beitrag im Admin-Bereich.</p></div>';
+      return;
+    }
+    
+    document.getElementById('hero-section').style.display = 'grid';
+    document.getElementById('hero-empty').style.display = 'none';
+    
+    // Hero feature (latest post)
+    const p = posts[0];
+    const fd = new Date(p.date).toLocaleDateString('de-DE', {day:'numeric', month:'long', year:'numeric'});
+    const exc = p.content.replace(/<[^>]+>/g, '').substring(0, 160) + '...';
+    
+    const hf = document.getElementById('hero-feature');
+    hf.onclick = () => location.href = 'post.html?id=' + p.id;
+    hf.innerHTML = `<div class="hf-orb"></div><div class="hf-content">
+      <div class="hf-label"><div class="hfl-bar"></div><div class="hfl-text">${p.category || 'Allgemein'}</div></div>
+      <div class="hf-title">${p.title}</div>
+      <div class="hf-excerpt">${exc}</div>
+      <div class="hf-meta">
+        <div class="hf-meta-l">
+          <span class="hf-cat">${p.category || 'Allgemein'}</span>
+          <strong>${p.author || 'Redaktion'}</strong>
+          <span>· ${fd}</span>
+        </div>
+        <a class="hf-read" href="post.html?id=${p.id}">Lesen →</a>
+      </div></div>`;
+    
+    // Stack (next 4 posts)
+    const hs = document.getElementById('hero-stack');
+    hs.innerHTML = '';
+    posts.slice(1, 5).forEach((p, i) => {
+      hs.innerHTML += `<div class="hs-item" onclick="location.href='post.html?id=${p.id}'">
+        <div class="hsi-n">0${i+2}</div>
+        <div class="hsi-cat">${p.category || 'Allgemein'}</div>
+        <div class="hsi-title">${p.title}</div>
+        <div class="hsi-meta">${p.author || 'Redaktion'} · ${new Date(p.date).toLocaleDateString('de-DE')}</div>
+      </div>`;
+    });
+    
+    // Cards
+    const pl = document.getElementById('posts-list');
+    pl.innerHTML = '';
+    posts.forEach((p, i) => {
+      const date = new Date(p.date).toLocaleDateString('de-DE', {day:'numeric', month:'long', year:'numeric'});
+      const exc = p.content.replace(/<[^>]+>/g, '').substring(0, 105) + '...';
+      pl.innerHTML += `<div class="post-card" onclick="location.href='post.html?id=${p.id}'">
+        <div class="pc-img">
+          <div class="pc-bg ${bgs[i % bgs.length]}"></div>
+          <div class="pc-num">${String(i+1).padStart(2,'0')}</div>
+          <div class="pc-tag">${p.category || 'Allgemein'}</div>
+        </div>
+        <div class="pc-body">
+          <div>
+            <div class="pc-meta">
+              <span class="pc-cat">${p.category || 'Allgemein'}</span>
+              <div class="pc-sep"></div>
+              <span class="pc-date">${date}</span>
+            </div>
+            <div class="pc-title">${p.title}</div>
+            <div class="pc-exc">${exc}</div>
+          </div>
+          <div class="pc-foot">
+            <span class="pc-author">${p.author || 'Redaktion'}</span>
+            <a class="pc-read" href="post.html?id=${p.id}">LESEN →</a>
+          </div>
+        </div>
+      </div>`;
+    });
+    
+    // Sidebar
+    const sr = document.getElementById('sidebar-recent');
+    sr.innerHTML = '';
+    posts.slice(0, 5).forEach(p => {
+      sr.innerHTML += `<div class="wi" onclick="location.href='post.html?id=${p.id}'">
+        <div class="wi-cat">${p.category || 'Allgemein'}</div>
+        <a class="wi-title" href="post.html?id=${p.id}">${p.title}</a>
+        <div class="wi-meta">${p.author || 'Redaktion'} · ${new Date(p.date).toLocaleDateString('de-DE')}</div>
+      </div>`;
+    });
+    
+  } catch (e) {
+    console.error('Error loading posts:', e);
+    document.getElementById('hero-empty').style.display = 'block';
+  }
+}
+
+// Load posts on page load
+loadPosts();
+
+// Auto-refresh every 30 seconds
+setInterval(loadPosts, 30000);
+</script>
+</body>
+</html>
