@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artikel — StadtStimme</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#F4F2EE;--white:#FFF;--card:#FFF;--ink:#1A1410;--mid:#2A1E14;--border:#E0D8CE;--orange:#E8500A;--orange2:#C03808;--char:#1A1410;--warm:#F0EAE0;--muted:#7A6A58;--light:#B0A090}
+body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+header{background:var(--char)}
+.hdr-inner{max-width:1340px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{text-decoration:none;display:flex;align-items:baseline;gap:0}
+.logo-stadt{font-family:'Raleway',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px}
+.logo-stimme{font-family:'Crimson Pro',serif;font-size:26px;font-weight:700;color:var(--orange);font-style:italic}
+nav a{display:inline-block;padding:6px 13px;color:rgba(255,255,255,0.4);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1px;transition:color .2s;border-right:1px solid rgba(255,255,255,0.06)}
+nav a:last-child{border-right:none}
+nav a:hover{color:var(--orange)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:rgba(255,255,255,0.5)}
+.mobile-nav{display:none;background:var(--char);border-top:1px solid rgba(255,255,255,0.06);padding:16px 32px;flex-direction:column;gap:4px}
+.mobile-nav a{display:block;padding:10px 0;color:rgba(255,255,255,0.5);text-decoration:none;font-size:13px;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.04)}
+.mobile-nav a:hover{color:var(--orange)}
+.mobile-nav.open{display:flex}
+/* HERO */
+.post-hero{background:var(--char);border-bottom:2px solid var(--orange)}
+.ph-inner{max-width:1340px;margin:0 auto;padding:60px 32px;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
+.ph-breadcrumb{font-size:11px;color:rgba(255,255,255,0.2);margin-bottom:16px;display:flex;gap:6px;font-weight:600;flex-wrap:wrap}
+.ph-breadcrumb a{color:rgba(255,255,255,0.2);text-decoration:none;transition:color .2s}
+.ph-breadcrumb a:hover{color:var(--orange)}
+.ph-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.ph-tag-cat{background:var(--orange);color:#fff;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:4px 12px}
+.ph-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
+.ph-title{font-family:'Crimson Pro',serif;font-size:52px;font-weight:700;color:#fff;line-height:1.02;margin-bottom:20px;letter-spacing:-0.5px;font-style:italic}
+.ph-meta{display:flex;align-items:center;gap:14px;font-size:12px;color:rgba(255,255,255,0.3);flex-wrap:wrap}
+.ph-meta strong{color:rgba(255,255,255,0.8);font-weight:700}
+.ph-av{width:34px;height:34px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-size:14px;font-weight:900;color:#fff;flex-shrink:0}
+.ph-visual{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);min-height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.ph-vis-big{font-family:'Raleway',sans-serif;font-size:160px;font-weight:900;color:rgba(255,255,255,0.04);line-height:1}
+.ph-vis-bar{position:absolute;bottom:0;left:0;right:0;height:4px;background:var(--orange)}
+/* LAYOUT */
+.layout{max-width:1240px;margin:48px auto;padding:0 32px;display:grid;grid-template-columns:1fr 270px;gap:36px}
+.main-col{background:var(--card);padding:52px 56px;border-top:3px solid var(--orange)}
+.back-btn{display:inline-flex;align-items:center;gap:7px;background:transparent;border:1.5px solid var(--border);color:var(--muted);text-decoration:none;font-size:10px;font-weight:700;padding:8px 16px;margin-bottom:36px;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
+.back-btn:hover{border-color:var(--orange);color:var(--orange)}
+.article-body{font-size:18px;line-height:1.9;color:var(--mid);font-weight:300}
+.article-body p{margin-bottom:26px}
+.article-body h2{font-family:'Crimson Pro',serif;font-size:34px;font-weight:700;color:var(--ink);margin:50px 0 14px;font-style:italic;position:relative;padding-bottom:12px}
+.article-body h2::after{content:'';position:absolute;bottom:0;left:0;width:30px;height:3px;background:var(--orange)}
+.article-body h3{font-family:'Crimson Pro',serif;font-size:24px;font-weight:700;color:var(--ink);margin:28px 0 10px;font-style:italic}
+.article-body a{color:var(--orange);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(232,80,10,0.3);transition:all .2s}
+.article-body a:hover{color:var(--ink);border-color:var(--ink)}
+.article-body ul,.article-body ol{padding-left:26px;margin-bottom:22px}
+.article-body li{margin-bottom:8px;line-height:1.8}
+.article-body strong{font-weight:700;color:var(--ink)}
+blockquote{border-left:3px solid var(--orange);padding:0 0 0 24px;margin:32px 0;font-family:'Crimson Pro',serif;font-size:24px;color:var(--ink);line-height:1.5;font-style:italic}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.widget{background:var(--card);border:1px solid var(--border);overflow:hidden}
+.wh{padding:12px 18px;border-bottom:1px solid var(--border);background:var(--warm);display:flex;align-items:center;gap:8px}
+.wh-bar{width:3px;height:14px;background:var(--orange);flex-shrink:0}
+.wh-title{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink)}
+.wb{padding:14px 18px}
+.ri{padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding .15s}
+.ri:last-child{border-bottom:none;padding-bottom:0}.ri:first-child{padding-top:0}
+.ri:hover{padding-left:6px}
+.ri-cat{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:3px}
+.ri-title{font-family:'Crimson Pro',serif;font-size:17px;color:var(--ink);line-height:1.25;text-decoration:none;display:block;font-style:italic}
+.ri-title:hover{color:var(--orange)}
+.ri-meta{font-size:11px;color:var(--light);margin-top:2px}
+.brand-box{background:var(--char);padding:22px}
+.bb-name{font-family:'Raleway',sans-serif;font-size:20px;font-weight:900;color:#fff;margin-bottom:6px}
+.bb-name em{font-style:italic;font-family:'Crimson Pro',serif;font-size:24px;font-weight:700;color:var(--orange)}
+.bb-text{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.65;font-weight:300}
+.not-found{text-align:center;padding:80px;color:var(--muted);grid-column:1/-1}
+footer{background:var(--char);margin-top:52px;text-align:center;padding:24px;font-size:12px;color:rgba(255,255,255,0.2)}
+footer a{color:rgba(255,255,255,0.2);text-decoration:none;margin:0 10px}
+footer a:hover{color:var(--orange)}
+.fl{margin-bottom:5px}
+.fl-s{font-family:'Raleway',sans-serif;font-size:20px;font-weight:900;color:#fff}
+.fl-e{font-family:'Crimson Pro',serif;font-size:24px;font-weight:700;color:var(--orange);font-style:italic}
+@media(max-width:1024px){.layout{grid-template-columns:1fr}.sidebar{display:none}.ph-inner{grid-template-columns:1fr;gap:24px}.ph-visual{display:none}}
+@media(max-width:768px){.ph-inner{padding:40px 24px}.ph-title{font-size:34px}.main-col{padding:36px 24px}.hdr-inner nav{display:none}.hamburger{display:flex}}
+@media(max-width:480px){.ph-title{font-size:26px}.main-col{padding:24px 18px}.article-body{font-size:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-inner">
+    <a href="index.html" class="logo"><span class="logo-stadt">Stadt</span><span class="logo-stimme">Stimme</span></a>
+    <nav><a href="index.html">← Start</a><a href="index.html">Politik</a><a href="index.html">Wirtschaft</a><a href="index.html">Kultur</a><a href="index.html">Technik</a></nav>
+    <button class="hamburger" onclick="document.getElementById('mn').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mn"><a href="index.html">← Alle Artikel</a><a href="index.html">Politik</a><a href="index.html">Wirtschaft</a><a href="index.html">Kultur</a></div>
+</header>
+<div id="post-hero" class="post-hero" style="display:none">
+  <div class="ph-inner">
+    <div>
+      <div class="ph-breadcrumb"><a href="index.html">Start</a><span>/</span><span id="ph-cat-bc">Allgemein</span></div>
+      <div class="ph-tag"><div class="ph-tag-cat" id="ph-cat">Allgemein</div><span class="ph-label">Artikel</span></div>
+      <div class="ph-title" id="ph-title"></div>
+      <div class="ph-meta"><div class="ph-av" id="ph-av">R</div><strong id="ph-author">Redaktion</strong><span>· <span id="ph-date"></span></span><span>· <span id="ph-read">5 Min.</span></span></div>
+    </div>
+    <div class="ph-visual"><div class="ph-vis-big" id="ph-letter">A</div><div class="ph-vis-bar"></div></div>
+  </div>
+</div>
+<div class="layout">
+  <div class="main-col">
+    <a href="index.html" class="back-btn">← Alle Artikel</a>
+    <div id="article-body" class="article-body"></div>
+    <div id="not-found" class="not-found" style="display:none"><h2 style="font-family:'Crimson Pro',serif;font-size:34px;font-style:italic">Artikel nicht gefunden.</h2></div>
+  </div>
+  <aside class="sidebar">
+    <div class="brand-box"><div class="bb-name">Stadt<em>Stimme</em></div><div class="bb-text">Das deutsche Blog für alle Themen.</div></div>
+    <div class="widget"><div class="wh"><div class="wh-bar"></div><div class="wh-title">Weitere Artikel</div></div><div class="wb"><div id="recent-posts"></div></div></div>
+  </aside>
+</div>
+<footer>
+  <div class="fl"><span class="fl-s">Stadt</span><span class="fl-e">Stimme</span></div>
+  <p>&copy; 2026 StadtStimme &nbsp;|&nbsp;<a href="#">Impressum</a>&nbsp;|&nbsp;<a href="#">Datenschutz</a></p>
+</footer>
+<script>
+// Constants
+const GIST_ID = '42ea11087f40fdba423f8eb0f575ac96';
+const SITE_NAME = 'stadtstimme';
+const RAW_URL = `https://gist.githubusercontent.com/Hamzamain-spec/${GIST_ID}/raw/posts.json`;
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+
+async function loadPost() {
+  try {
+    const response = await fetch(RAW_URL);
+    const allPosts = await response.json();
+    
+    // Filter posts by site name
+    const sitePosts = Array.isArray(allPosts) 
+      ? allPosts.filter(p => p.site === SITE_NAME)
+      : [];
+    
+    const post = sitePosts.find(p => p.id == id);
+    
+    if (post) {
+      document.title = post.title + ' — StadtStimme';
+      document.getElementById('ph-title').textContent = post.title;
+      document.getElementById('ph-cat').textContent = post.category || 'Allgemein';
+      document.getElementById('ph-cat-bc').textContent = post.category || 'Allgemein';
+      document.getElementById('ph-author').textContent = post.author || 'Redaktion';
+      document.getElementById('ph-av').textContent = (post.author || 'R').charAt(0).toUpperCase();
+      document.getElementById('ph-date').textContent = new Date(post.date).toLocaleDateString('de-DE', {day:'numeric', month:'long', year:'numeric'});
+      
+      const w = post.content.replace(/<[^>]+>/g, '').split(' ').length;
+      document.getElementById('ph-read').textContent = Math.max(1, Math.round(w / 200)) + ' Min. Lesezeit';
+      document.getElementById('ph-letter').textContent = post.title.charAt(0).toUpperCase();
+      document.getElementById('article-body').innerHTML = post.content;
+      document.getElementById('post-hero').style.display = 'block';
+      
+      // Recent posts (excluding current)
+      const rp = document.getElementById('recent-posts');
+      rp.innerHTML = '';
+      sitePosts.slice().reverse().slice(0, 6).forEach(p => {
+        if (p.id == id) return;
+        rp.innerHTML += `<div class="ri">
+          <div class="ri-cat">${p.category || 'Allgemein'}</div>
+          <a class="ri-title" href="post.html?id=${p.id}">${p.title}</a>
+          <div class="ri-meta">${p.author || 'Redaktion'} · ${new Date(p.date).toLocaleDateString('de-DE')}</div>
+        </div>`;
+      });
+    } else {
+      document.getElementById('not-found').style.display = 'block';
+    }
+  } catch (e) {
+    console.error('Error loading post:', e);
+    document.getElementById('not-found').style.display = 'block';
+  }
+}
+
+// Load the post
+loadPost();
+</script>
+</body>
+</html>
