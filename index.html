@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StadtStimme — Die Stimme deiner Stadt</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F4F2EE;--white:#FFF;--card:#FFF;
+  --ink:#1A1410;--mid:#2A1E14;
+  --border:#E0D8CE;
+  --orange:#E8500A;--orange2:#C03808;
+  --char:#1A1410;--warm:#F0EAE0;--warm2:#E8DFD0;
+  --muted:#7A6A58;--light:#B0A090;
+  --cream:#FAF7F2;
+}
+body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ── TOP STRIP ── */
+.topstrip{background:var(--orange);padding:7px 0}
+.ts-inner{max-width:1340px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.ts-l{font-size:11px;color:rgba(255,255,255,0.85);letter-spacing:1px;font-weight:700}
+.ts-r{display:flex;gap:16px}
+.ts-r a{font-size:10px;color:rgba(255,255,255,0.7);text-decoration:none;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:color .2s}
+.ts-r a:hover{color:#fff}
+
+/* ── HEADER ── */
+header{background:var(--char);position:sticky;top:0;z-index:200}
+.hdr{max-width:1340px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{text-decoration:none;display:flex;align-items:center;gap:0}
+.logo-block{display:flex;flex-direction:column}
+.logo-top{display:flex;align-items:baseline;gap:0}
+.logo-stadt{font-family:'Raleway',sans-serif;font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1}
+.logo-stimme{font-family:'Crimson Pro',serif;font-size:34px;font-weight:600;color:var(--orange);font-style:italic;letter-spacing:-0.5px;line-height:1}
+.logo-sub{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:700;margin-top:3px}
+.hdr-nav{display:flex;align-items:center;gap:0}
+.hdr-nav a{padding:6px 14px;color:rgba(255,255,255,0.45);text-decoration:none;font-size:11px;font-weight:700;letter-spacing:1px;transition:color .2s;border-right:1px solid rgba(255,255,255,0.06)}
+.hdr-nav a:last-child{border-right:none}
+.hdr-nav a:hover{color:var(--orange)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:rgba(255,255,255,0.6);transition:.3s}
+.mobile-nav{display:none;background:var(--char);border-top:1px solid rgba(255,255,255,0.08);padding:16px 32px;flex-direction:column;gap:4px}
+.mobile-nav a{display:block;padding:10px 0;color:rgba(255,255,255,0.55);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:1px;border-bottom:1px solid rgba(255,255,255,0.04);transition:color .2s}
+.mobile-nav a:hover{color:var(--orange)}
+.mobile-nav.open{display:flex}
+
+/* ── HERO — ASYMMETRIC ── */
+.hero{display:grid;grid-template-columns:58% 42%;min-height:520px;background:var(--char)}
+.hero-feature{position:relative;overflow:hidden;cursor:pointer;background:linear-gradient(160deg,#1A1410 0%,#2E1A08 60%,#1A0E04 100%)}
+.hf-orb{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,80,10,0.18) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none}
+.hf-content{position:relative;padding:56px 52px 52px 44px;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+.hf-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;width:fit-content}
+.hfl-bar{width:28px;height:3px;background:var(--orange)}
+.hfl-text{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--orange)}
+.hf-title{font-family:'Crimson Pro',serif;font-size:58px;font-weight:700;color:#fff;line-height:1.02;margin-bottom:14px;letter-spacing:-0.5px;font-style:italic}
+.hero-feature:hover .hf-title{color:var(--orange)}
+.hf-excerpt{font-size:14px;line-height:1.75;color:rgba(255,255,255,0.5);font-weight:300;max-width:500px;margin-bottom:22px}
+.hf-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.hf-meta-l{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,0.35)}
+.hf-meta-l strong{color:rgba(255,255,255,0.75);font-weight:700}
+.hf-cat{background:var(--orange);color:#fff;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px}
+.hf-read{display:inline-flex;align-items:center;gap:6px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:9px 18px;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
+.hf-read:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+/* SIDE STACK */
+.hero-stack{display:flex;flex-direction:column;border-left:1px solid rgba(255,255,255,0.06)}
+.hs-item{flex:1;padding:22px 28px;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:background .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hs-item:last-child{border-bottom:none}
+.hs-item::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.hs-item:hover{background:rgba(255,255,255,0.03)}
+.hs-item:hover::after{transform:scaleX(1)}
+.hsi-n{font-size:48px;font-weight:900;color:rgba(255,255,255,0.04);line-height:1;margin-bottom:4px;letter-spacing:-2px}
+.hsi-cat{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:5px}
+.hsi-title{font-family:'Crimson Pro',serif;font-size:20px;font-weight:600;color:rgba(255,255,255,0.8);line-height:1.25;margin-bottom:4px;font-style:italic}
+.hs-item:hover .hsi-title{color:#fff}
+.hsi-meta{font-size:11px;color:rgba(255,255,255,0.2);font-weight:500}
+
+/* ── TICKER ── */
+.ticker{background:var(--orange);padding:10px 0;overflow:hidden}
+.ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:tick 30s linear infinite}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 32px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.9);letter-spacing:0.5px}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,0.4);flex-shrink:0}
+.ticker-label{background:rgba(255,255,255,0.18);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;letter-spacing:2px;text-transform:uppercase}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:1340px;margin:48px auto;padding:0 32px;display:grid;grid-template-columns:1fr 300px;gap:40px}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.sec-hd-bar{width:4px;height:22px;background:var(--orange)}
+.sec-hd-title{font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink)}
+.sec-hd-line{flex:1;height:1px;background:var(--border)}
+.sec-hd-count{font-size:11px;color:var(--muted);font-weight:700}
+
+/* ── POST CARD (horizontal) ── */
+.post-card{display:grid;grid-template-columns:200px 1fr;background:var(--card);margin-bottom:3px;cursor:pointer;overflow:hidden;transition:all .3s;position:relative}
+.post-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--orange);transform:scaleY(0);transition:transform .25s;transform-origin:top}
+.post-card:hover::before{transform:scaleY(1)}
+.post-card:hover{box-shadow:6px 0 24px rgba(232,80,10,0.12);transform:translateX(-3px)}
+.post-card:hover .pc-bg{transform:scale(1.07)}
+.pc-img{position:relative;overflow:hidden;min-height:144px}
+.pc-bg{width:100%;height:100%;position:absolute;inset:0;transition:transform .5s}
+.pc-num{position:absolute;top:8px;right:10px;font-family:'Raleway',sans-serif;font-size:36px;font-weight:900;color:rgba(255,255,255,0.08);line-height:1}
+.pc-tag{position:absolute;bottom:8px;left:8px;background:var(--orange);color:#fff;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px}
+.pc-body{padding:18px 22px;display:flex;flex-direction:column;justify-content:space-between;border-left:2px solid var(--border)}
+.pc-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.pc-cat{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--orange)}
+.pc-sep{width:3px;height:3px;border-radius:50%;background:var(--light)}
+.pc-date{font-size:11px;color:var(--muted)}
+.pc-title{font-family:'Crimson Pro',serif;font-size:22px;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:7px;font-style:italic;transition:color .2s}
+.post-card:hover .pc-title{color:var(--orange)}
+.pc-exc{font-size:13px;line-height:1.6;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px;font-weight:300}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:9px;border-top:1px solid var(--border)}
+.pc-author{font-size:11px;font-weight:700;color:var(--mid)}
+.pc-read{font-size:11px;font-weight:800;color:var(--orange);text-decoration:none;letter-spacing:1px;transition:letter-spacing .2s}
+.post-card:hover .pc-read{letter-spacing:2.5px}
+.empty-state{text-align:center;padding:80px 40px;background:var(--card);border:1px solid var(--border)}
+.empty-state h3{font-family:'Crimson Pro',serif;font-size:34px;font-style:italic;color:var(--ink);margin-bottom:8px}
+.empty-state p{color:var(--muted);font-size:14px}
+.bg1{background:linear-gradient(160deg,#1A1410,#2E1A08)}.bg2{background:linear-gradient(160deg,#E8500A,#8A2400)}.bg3{background:linear-gradient(160deg,#0A2E1A,#041208)}.bg4{background:linear-gradient(160deg,#0A1A2E,#040812)}.bg5{background:linear-gradient(160deg,#2E0A1A,#120408)}.bg6{background:linear-gradient(160deg,#1A2A00,#0A1400)}.bg7{background:linear-gradient(160deg,#1A0A2E,#080414)}.bg8{background:linear-gradient(160deg,#2E2A00,#141200)}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.widget{background:var(--card);border:1px solid var(--border);overflow:hidden}
+.w-hd{padding:12px 18px;border-bottom:1px solid var(--border);background:var(--warm);display:flex;align-items:center;gap:8px}
+.w-hd-bar{width:3px;height:14px;background:var(--orange);flex-shrink:0}
+.w-hd-title{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink)}
+.w-body{padding:14px 18px}
+.wi{padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding .15s}
+.wi:last-child{border-bottom:none;padding-bottom:0}.wi:first-child{padding-top:0}
+.wi:hover{padding-left:6px}
+.wi-cat{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:3px}
+.wi-title{font-family:'Crimson Pro',serif;font-size:17px;color:var(--ink);line-height:1.25;text-decoration:none;display:block;font-style:italic;font-weight:600}
+.wi-title:hover{color:var(--orange)}
+.wi-meta{font-size:11px;color:var(--light);margin-top:2px;font-weight:500}
+.brand-box{background:var(--char);padding:24px;position:relative;overflow:hidden}
+.brand-box::before{content:'S';position:absolute;right:-10px;bottom:-20px;font-family:'Raleway',sans-serif;font-size:100px;font-weight:900;color:rgba(255,255,255,0.03);line-height:1}
+.bb-name{font-family:'Raleway',sans-serif;font-size:22px;font-weight:900;color:#fff;line-height:1;margin-bottom:4px;position:relative}
+.bb-name em{font-style:italic;font-family:'Crimson Pro',serif;font-size:26px;font-weight:700;color:var(--orange)}
+.bb-text{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.65;font-weight:300;position:relative}
+.cat-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.cat-tag{background:var(--warm);border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:700;padding:6px 12px;text-decoration:none;transition:all .2s;cursor:pointer;letter-spacing:0.3px}
+.cat-tag:hover{background:var(--orange);color:#fff;border-color:var(--orange)}
+
+/* ── FOOTER ── */
+footer{background:var(--char);margin-top:56px}
+.footer-inner{max-width:1340px;margin:0 auto;padding:48px 32px;display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:44px}
+.fl-name{font-family:'Raleway',sans-serif;font-size:26px;font-weight:900;color:#fff;line-height:1;margin-bottom:12px}
+.fl-name em{font-style:italic;font-family:'Crimson Pro',serif;font-size:30px;font-weight:700;color:var(--orange)}
+.fb-text{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.3);font-weight:300}
+.fc h4{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px}
+.fc a{display:block;color:rgba(255,255,255,0.35);text-decoration:none;font-size:13px;margin-bottom:8px;font-weight:400;transition:color .2s}
+.fc a:hover{color:var(--orange)}
+.footer-btm{border-top:1px solid rgba(255,255,255,0.06);max-width:1340px;margin:0 auto;padding:14px 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:11px;color:rgba(255,255,255,0.2)}
+.footer-btm a{color:rgba(255,255,255,0.2);text-decoration:none;margin-left:14px;transition:color .2s}
+.footer-btm a:hover{color:#fff}
+.admin-link{position:fixed;bottom:20px;right:20px;background:var(--orange);color:#fff;padding:10px 20px;font-size:10px;text-decoration:none;opacity:0;transition:opacity .3s;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+body:hover .admin-link{opacity:0.5}
+.admin-link:hover{opacity:1!important}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-stack{display:none}
+  .main{grid-template-columns:1fr;gap:32px}
+  .sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .footer-inner{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media(max-width:768px){
+  .ts-r{display:none}
+  .hdr-nav{display:none}
+  .hamburger{display:flex}
+  .hdr{height:60px}
+  .logo-stadt{font-size:22px}
+  .logo-stimme{font-size:26px}
+  .hf-title{font-size:36px}
+  .hf-content{padding:36px 24px 28px}
+  .post-card{grid-template-columns:130px 1fr}
+  .pc-title{font-size:17px}
+  .pc-exc{display:none}
+  .sidebar{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+  .main{margin:32px auto;padding:0 20px}
+  .sec-hd{margin-bottom:16px}
+}
+@media(max-width:480px){
+  .topstrip{display:none}
+  .post-card{grid-template-columns:100px 1fr}
+  .pc-tag{display:none}
+  .hf-excerpt{display:none}
+  .hf-title{font-size:28px}
+  .main{padding:0 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="topstrip"><div class="ts-inner">
+  <div class="ts-l">📢 StadtStimme — Die Stimme Deutschlands</div>
+  <div class="ts-r"><a href="#">Newsletter</a><a href="#">Archiv</a><a href="#">Impressum</a></div>
+</div></div>
+
+<header>
+  <div class="hdr">
+    <a href="index.html" class="logo">
+      <div class="logo-block">
+        <div class="logo-top"><span class="logo-stadt">Stadt</span><span class="logo-stimme">Stimme</span></div>
+        <div class="logo-sub">Dein deutsches Blog</div>
+      </div>
+    </a>
+    <nav class="hdr-nav">
+      <a href="index.html">Alle</a><a href="index.html">Politik</a><a href="index.html">Wirtschaft</a>
+      <a href="index.html">Gesellschaft</a><a href="index.html">Kultur</a><a href="index.html">Technik</a>
+      <a href="index.html">Wissen</a><a href="index.html">Sport</a><a href="index.html">Lifestyle</a>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html" onclick="toggleMenu()">Alle Beiträge</a>
+    <a href="index.html" onclick="toggleMenu()">Politik</a><a href="index.html" onclick="toggleMenu()">Wirtschaft</a>
+    <a href="index.html" onclick="toggleMenu()">Gesellschaft</a><a href="index.html" onclick="toggleMenu()">Kultur</a>
+    <a href="index.html" onclick="toggleMenu()">Technik</a><a href="index.html" onclick="toggleMenu()">Wissen</a>
+    <a href="index.html" onclick="toggleMenu()">Sport</a><a href="index.html" onclick="toggleMenu()">Lifestyle</a>
+  </div>
+</header>
+
+<div id="hero-section" class="hero" style="display:none">
+  <div class="hero-feature" id="hero-feature"></div>
+  <div class="hero-stack" id="hero-stack"></div>
+</div>
+<div id="hero-empty" style="display:none;background:var(--char);padding:64px 32px;text-align:center">
+  <div style="font-family:'Raleway',sans-serif;font-size:52px;font-weight:900;color:rgba(255,255,255,0.04)">StadtStimme</div>
+  <p style="color:rgba(255,255,255,0.2);font-size:14px;margin-top:8px">Noch keine Artikel — erstelle deinen ersten im Admin-Bereich.</p>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner" id="ticker-inner">
+    <span class="ticker-item"><span class="ticker-label">NEU</span>StadtStimme — Dein Blog für Deutschland<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-label">LIVE</span>Täglich neue Beiträge<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-label">TOP</span>Politik · Wirtschaft · Gesellschaft · Kultur<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-label">NEU</span>StadtStimme — Dein Blog für Deutschland<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-label">LIVE</span>Täglich neue Beiträge<span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-label">TOP</span>Politik · Wirtschaft · Gesellschaft · Kultur<span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<div class="main">
+  <div>
+    <div class="sec-hd"><div class="sec-hd-bar"></div><div class="sec-hd-title">Aktuelle Beiträge</div><div class="sec-hd-line"></div><div class="sec-hd-count" id="sec-count">0 Beiträge</div></div>
+    <div id="posts-list"><div class="empty-state"><h3>Noch keine Artikel</h3><p>Erstelle deinen ersten Beitrag im Admin-Bereich.</p></div></div>
+  </div>
+  <aside class="sidebar">
+    <div class="brand-box"><div class="bb-name">Stadt<em>Stimme</em></div><div class="bb-text">Das deutsche Blog für alle Themen — täglich neue Beiträge aus Politik, Wirtschaft, Gesellschaft und mehr.</div></div>
+    <div class="widget"><div class="w-hd"><div class="w-hd-bar"></div><div class="w-hd-title">Neueste Beiträge</div></div><div class="w-body"><div id="sidebar-recent"></div></div></div>
+    <div class="widget"><div class="w-hd"><div class="w-hd-bar"></div><div class="w-hd-title">Kategorien</div></div><div class="w-body"><div class="cat-wrap">
+      <a href="index.html" class="cat-tag">Politik</a><a href="index.html" class="cat-tag">Wirtschaft</a>
+      <a href="index.html" class="cat-tag">Gesellschaft</a><a href="index.html" class="cat-tag">Kultur</a>
+      <a href="index.html" class="cat-tag">Technik</a><a href="index.html" class="cat-tag">Wissen</a>
+      <a href="index.html" class="cat-tag">Lifestyle</a><a href="index.html" class="cat-tag">Sport</a>
+      <a href="index.html" class="cat-tag">Reise</a><a href="index.html" class="cat-tag">Gesundheit</a>
+    </div></div></div>
+  </aside>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="fl-name">Stadt<em>Stimme</em></div><div class="fb-text">StadtStimme ist das deutschsprachige Blog für alle Themen. Täglich aktuelle Beiträge zu Politik, Wirtschaft, Gesellschaft, Kultur, Technik, Wissen und Leben.</div></div>
+    <div class="fc"><h4>Themen</h4><a href="#">Politik</a><a href="#">Wirtschaft</a><a href="#">Gesellschaft</a><a href="#">Kultur</a><a href="#">Technik</a></div>
+    <div class="fc"><h4>Service</h4><a href="#">Newsletter</a><a href="#">Archiv</a><a href="#">RSS</a></div>
+    <div class="fc"><h4>Info</h4><a href="#">Über uns</a><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Kontakt</a></div>
+  </div>
+  <div class="footer-btm"><span>&copy; 2026 StadtStimme</span><div><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div>
+</footer>
+<a href="admin.html" class="admin-link">⚙ Admin</a>
+
+<script>
+// Constants
+const GIST_ID = '42ea11087f40fdba423f8eb0f575ac96';
+const SITE_NAME = 'stadtstimme';
+const RAW_URL = `https://gist.githubusercontent.com/Hamzamain-spec/${GIST_ID}/raw/posts.json`;
+
+function toggleMenu(){const n=document.getElementById('mobile-nav');n.classList.toggle('open');}
+const d=new Date(),days=['So','Mo','Di','Mi','Do','Fr','Sa'],months=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const bgs=['bg1','bg2','bg3','bg4','
